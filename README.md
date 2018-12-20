@@ -13,7 +13,6 @@ PASS
 ```sh
 ### 安裝套件
 $ pip install django==1.11
-$ pip install djangorestframework
 
 ### 凍結套件包
 $ pip freeze > requirements.txt
@@ -25,7 +24,7 @@ $ pip install -r requirements.txt
 $ django-admin startproject proj
 
 ### 開始 run 專案
-$ cd proj
+$ cd proj         # 第一層 /proj/ 裡面
 $ python manage.py runserver
 # http://127.0.0.1:8000
 # Ctrl + C 中斷
@@ -43,14 +42,14 @@ PASS
 ### 建立 blog 這個應用程式
 $ python manage.py startapp blog
 
-### 修改 proj/settings.py (註冊應用程式到 Django 主專案)
+### 修改 /proj/proj/settings.py (註冊應用程式到 Django 主專案)
 # 在 INSTALLED_APPS 區塊增加 「blog」這個應用程式
 
-### 修改 proj/urls.py (Django主專案 路由機制 交由 App路由機制自行管控)
+### 修改 /proj/proj/urls.py (Django主專案 路由機制 交由 App路由機制自行管控)
 # 1. 修改第一行為 「from django.conf.urls import url, include」
 # 2. 在 urlpatterns 裏頭新增 「url(r'^blog/', include('blog.urls')),」
 
-### 新增並修改 blog/urls.py (App路由機制)
+### 新增並修改 /proj/blog/urls.py (App路由機制)
 # -------------------- 內容如下 --------------------
 from django.conf.urls import url
 from . import views
@@ -63,7 +62,7 @@ urlpatterns = [
 ]
 # -------------------- 內容如上 --------------------
 
-### 修改 blog/views.py
+### 修改 /proj/blog/views.py
 # -------------------- 內容如下 --------------------
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -108,4 +107,74 @@ def page2(request):
 
 
 ## 4. 業務邏輯
+
+### Models: 一個作者可以發文, 改文, 刪文
+
+```sh
+### 修改 /proj/blog/models.py
+# -------------------- 內容如下 --------------------
+from django.db import models
+
+class Article(models.Model):
+    author = models.ForeignKey('User', related_name='author_name')
+    title = models.CharField(max_length=20)
+    context = models.TextField(blank=True, default='')
+    def __str__(self):
+        return self.title
+
+class User(models.Model):
+    name = models.CharField(max_length=16)
+    def __str__(self):
+        return self.name
+# -------------------- 內容如上 --------------------
+```
+
+
+### Database
+
+```sh
+### 製作 /proj/blog/migrations/ 紀錄
+$ python manage.py makemigrations blog
+Migrations for 'blog':
+  blog\migrations\0001_initial.py
+    - Create model Article
+    - Create model User
+    - Add field author to article
+
+### 將上述 migrations 裏頭最新的Schema紀錄, 同步到 database
+$ python manage.py migrate blog
+Operations to perform:
+  Apply all migrations: blog
+Running migrations:
+  Applying blog.0001_initial... OK
+```
+
+### 測試文件
+
+```sh
+### 新增 api.http
+@baseURL=127.0.0.1:8000
+
+### 
+GET http://{{baseURL}}/blog
+
+### 
+GET http://{{baseURL}}/blog/1
+
+### 
+GET http://{{baseURL}}/blog/2
+```
+
+
+
+
+## 5. DjangoRestFramework
+
+* https://www.django-rest-framework.org/tutorial/quickstart/
+
+```sh
+### Django REST 套件
+$ pip install djangorestframework
+```
+
 

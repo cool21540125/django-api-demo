@@ -1,0 +1,12 @@
+@baseURL=127.0.0.1:8000
+
+### 
+GET http://{{baseURL}}/blog
+
+### 
+GET http://{{baseURL}}/blog/1
+
+### 
+GET http://{{baseURL}}/blog/2
+
+
