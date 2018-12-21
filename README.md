@@ -166,9 +166,41 @@ GET http://{{baseURL}}/blog/2
 ```
 
 
+## 5. Django Shell
 
+Django 可以使用互動式介面來作除錯...
 
-## 5. DjangoRestFramework
+```sh
+$ python manage.py shell
+
+# 匯入 models 裏頭的物件, 使用 ORM 語法對物件模型作操作
+>>> from blog.models import *
+
+# ORM 語法作查詢
+>>> User.objects.all()
+<QuerySet []>
+
+# 新增一位使用者
+>>> User.objects.create(name='tony', iq=200)
+
+# 新增一篇文章
+>>> Article.objects.create(title='demo', context='Django manage.py shell 測試', author_id=1)
+
+# 新增第二位使用者
+>>> u2 = User.objects.create(name='scott', iq=100)
+
+# 第二位使用者發文
+>>> Article.objects.create(title='我是阿良', context='python 弱弱的', author_id=u2.id)
+<Article: 我是阿良>
+
+# 第二位使用者發文
+>>> Article.objects.create(title='阿良又來了', context='tony好強', author_id=u2.id)
+<Article: 阿良又來了>
+```
+
+## 6. 
+
+## 7. DjangoRestFramework
 
 * https://www.django-rest-framework.org/tutorial/quickstart/
 

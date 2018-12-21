@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import User, Article
 
 # 回傳字串的用法
 def page0(request):

@@ -9,10 +9,17 @@ class Article(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        db_table = 'articles'
+
 
 class User(models.Model):
 
     name = models.CharField(max_length=16)
+    iq = models.IntegerField(blank=False, null=False)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        db_table = 'users'
