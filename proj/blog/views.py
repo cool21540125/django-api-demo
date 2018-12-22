@@ -86,24 +86,6 @@ class UserDetail(APIView):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class ArticleList(APIView):
 
     def get(self, request, format=None):
@@ -120,6 +102,8 @@ class ArticleList(APIView):
 
 
 class ArticleDetail(APIView):
+
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def get_object(self, pk): 
         try:

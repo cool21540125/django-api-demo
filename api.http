@@ -37,9 +37,9 @@ POST {{baseURL}}/blog/rest_user_list/
 Content-Type: application/json
 
 {
-    "username": "tony1",
-    "password": "password11",
-    "email": "tony1@example.com"
+    "username": "tony2",
+    "password": "password22",
+    "email": "tony2@example.com"
 }
 
 ### 查詢特定使用者
@@ -67,9 +67,10 @@ GET {{baseURL}}/blog/rest_article_list/
 ### 新增一位文章
 POST {{baseURL}}/blog/rest_article_list/
 Content-Type: application/json
+Authorization: Basic scott scott123
 
 {
-    "author" : 2,
+    "author" : 3,
     "title": "早安",
     "context": "早起的鳥兒有蟲吃"
 }
@@ -78,11 +79,12 @@ Content-Type: application/json
 GET {{baseURL}}/blog/rest_article/2/
 
 ### 更改特定文章
-PUT {{baseURL}}/blog/rest_article/2/
+PUT {{baseURL}}/blog/rest_article/3/
 Content-Type: application/json
+Authorization: Digest scott scott123
 
 {
-    "author" : 2,
+    "author" : 3,
     "title": "早安",
     "context": "早起的蟲兒被鳥吃"
 }

@@ -242,6 +242,10 @@ $ python manage.py shell
 
 >>> u1 = User.objects.first()
 
+# 新增一位使用者
+>>> s = User.objects.create(username='scott')
+>>> s.set_password('scott123')
+>>> s.save()
 
 # 新增一篇文章
 >>> Article.objects.create(title='demo', context='Django manage.py shell 測試', author_id=1)
