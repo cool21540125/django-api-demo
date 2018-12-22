@@ -63,10 +63,10 @@ python manage.py runserver
 ### 進入 REPL
 python manage.py shell
 
-### 依照 models 紀錄, 更新 Database
-python manage.py migrate <AppName>
+### 初始化 Database
+python manage.py migrate
 
-### 依照 models 作變更紀錄
+### 依照 models 作 變更紀錄
 python manage.py makemigrations <AppName>
 
 ### 建立 Django admin user
@@ -74,6 +74,7 @@ python manage.py createsuperuser --username <UserName> --email <EMail>
 
 # python manage.py migrate
 # python manage.py makemigrations blog
+# python manage.py migrate
 # python manage.py createsuperuser --username tony --email cool21540125@gmail.com
 ```
 

@@ -37,13 +37,13 @@ POST {{baseURL}}/blog/rest_user_list/
 Content-Type: application/json
 
 {
-    "username": "tony33",
-    "password": "password123",
-    "email": "test@example.com"
+    "username": "tony1",
+    "password": "password11",
+    "email": "tony1@example.com"
 }
 
 ### 查詢特定使用者
-GET {{baseURL}}/blog/rest_user/2/
+GET {{baseURL}}/blog/rest_user/1/
 
 ### 更改特定使用者
 PUT {{baseURL}}/blog/rest_user/3/
@@ -56,7 +56,7 @@ Content-Type: application/json
 }
 
 ### 刪除特定使用者
-DELETE {{baseURL}}/blog/rest_user/3/
+DELETE {{baseURL}}/blog/rest_user/1/
 
 
 ################# REST - Article #################
