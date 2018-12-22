@@ -19,6 +19,44 @@ Authorization: Basic tony password123
 
 ### Django Obj PUT
 PUT {{baseURL}}/blog/users
+Authorization: Basic tony password123
 
 ### Django Obj DELETE
 DELETE {{baseURL}}/blog/users
+Authorization: Basic tony password123
+
+
+
+################# REST - User #################
+
+### 查詢全部使用者
+GET {{baseURL}}/blog/rest_user_list/
+
+### 新增一位使用者
+POST {{baseURL}}/blog/rest_user_list/
+Content-Type: application/json
+
+{
+    "username": "tony33",
+    "password": "password123",
+    "email": "test@example.com"
+}
+
+### 查詢特定使用者
+GET {{baseURL}}/blog/rest_user/2/
+
+### 更改特定使用者
+PUT {{baseURL}}/blog/rest_user/3/
+Content-Type: application/json
+
+{
+    "username": "tony33333333333",
+    "password": "password123333333",
+    "email": "test3@example.com"
+}
+
+### 刪除特定使用者
+DELETE {{baseURL}}/blog/rest_user/3/
+
+
+################# REST - Article #################

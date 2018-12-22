@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class Article(models.Model):
 
-    author = models.ForeignKey('auth.User', related_name='author_name')
+    # author = models.ForeignKey('auth.User', related_name='author_name')
     title = models.CharField(max_length=20)
     context = models.TextField(blank=True, default='')
 

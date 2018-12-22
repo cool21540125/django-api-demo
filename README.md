@@ -172,23 +172,40 @@ class User(models.Model):
 ```
 
 
+
+
+
+
 ### Database
 
 ```sh
-### 製作 /proj/blog/migrations/ 紀錄
+### 依照 models 紀錄, 更新 Database
+$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying sessions.0001_initial... OK
+# 上面這堆, 是在建立 table
+
+
+### 依照 models 作變更紀錄
 $ python manage.py makemigrations blog
 Migrations for 'blog':
   blog\migrations\0001_initial.py
     - Create model Article
-    - Create model User
-    - Add field author to article
-
-### 將上述 migrations 裏頭最新的Schema紀錄, 同步到 database
-$ python manage.py migrate blog
-Operations to perform:
-  Apply all migrations: blog
-Running migrations:
-  Applying blog.0001_initial... OK
+# 建立 /proj/blog/migrations/...
 ```
 
 ### 測試文件
@@ -222,10 +239,8 @@ $ python manage.py shell
 >>> User.objects.all()
 <QuerySet []>
 
-# 新增一位使用者
->>> u1 = User.objects.create(username='tony')
->>> u1.set_password('password123')
->>> u1.save()
+>>> u1 = User.objects.first()
+
 
 # 新增一篇文章
 >>> Article.objects.create(title='demo', context='Django manage.py shell 測試', author_id=1)
