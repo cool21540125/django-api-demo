@@ -60,3 +60,32 @@ DELETE {{baseURL}}/blog/rest_user/1/
 
 
 ################# REST - Article #################
+
+### 查詢全部文章
+GET {{baseURL}}/blog/rest_article_list/
+
+### 新增一位文章
+POST {{baseURL}}/blog/rest_article_list/
+Content-Type: application/json
+
+{
+    "author" : 2,
+    "title": "早安",
+    "context": "早起的鳥兒有蟲吃"
+}
+
+### 查詢特定文章
+GET {{baseURL}}/blog/rest_article/2/
+
+### 更改特定文章
+PUT {{baseURL}}/blog/rest_article/2/
+Content-Type: application/json
+
+{
+    "author" : 2,
+    "title": "早安",
+    "context": "早起的蟲兒被鳥吃"
+}
+
+### 刪除特定文章
+DELETE {{baseURL}}/blog/rest_article/2/

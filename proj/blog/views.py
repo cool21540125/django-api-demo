@@ -30,7 +30,7 @@ def users(request):
 
 
 
-### 底下為 djangorestframework
+### 底下為 djangorestframework ---------------------
 from rest_framework import permissions
 from blog.permissions import IsOwnerOrReadOnly
 from django.http import Http404 
@@ -57,7 +57,7 @@ class UserList(APIView):
 
 
 class UserDetail(APIView):
-    #
+
     def get_object(self, pk): 
         try:
             return User.objects.get(pk=pk)
@@ -79,8 +79,68 @@ class UserDetail(APIView):
 
     def delete(self, request, pk):
         uu = self.get_object(pk)
-        print('pkpkkkkkk')
-        print(dir(uu))
-        print('=====================')
+        uu.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class ArticleList(APIView):
+
+    def get(self, request, format=None):
+        users = Article.objects.all()
+        serializer = ArticleSerializer(users, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = ArticleSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+
+
+class ArticleDetail(APIView):
+
+    def get_object(self, pk): 
+        try:
+            return Article.objects.get(pk=pk)
+        except Article.DoesNotExist: 
+            raise Http404
+
+    def get(self, request, pk):
+        uu = self.get_object(pk)
+        serializer = ArticleSerializer(uu)
+        return Response(serializer.data)
+
+    def put(self, request, pk):
+        uu = self.get_object(pk)
+        serializer = ArticleSerializer(uu, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        uu = self.get_object(pk)
         uu.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
