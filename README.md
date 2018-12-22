@@ -31,9 +31,51 @@ $ python manage.py runserver
 ```
 
 
-## 2. 專案架構介紹
+## 2. 專案架構介紹 && 主要指令
 
-PASS
+### 2-1. 專案架構
+
+```sh
+/proj
+    /blog       # Django Application
+        /__init__.py
+        /admin.py       # (我還沒用過)
+        /apps.py        # (我還沒用過)
+        /models.py      # App Models
+        /tests.py       # App 測試
+        /urls.py        # App 路由機制
+        /views.py       # App views
+    /proj       # 專案主檔目錄
+        /__init__.py
+        /settings.py    # 所有專案設定檔
+        /urls.py        # 專案路由機制
+        /wsgi.py        # WSGI Application
+    /manage.py  # Django CLI 控制檔案
+```
+
+### 2-2. 主要指令
+
+```sh
+# 先進入第一層 /proj 裡面 (有 manage.py 的地方)
+### 起始 Debug Server
+python manage.py runserver
+
+### 進入 REPL
+python manage.py shell
+
+### 依照 models 紀錄, 更新 Database
+python manage.py migrate <AppName>
+
+### 依照 models 作變更紀錄
+python manage.py makemigrations <AppName>
+
+### 建立 Django admin user
+python manage.py createsuperuser --username <UserName> --email <EMail>
+
+# python manage.py migrate
+# python manage.py makemigrations blog
+# python manage.py createsuperuser --username tony --email cool21540125@gmail.com
+```
 
 
 ## 3. 建立 Application
@@ -181,7 +223,9 @@ $ python manage.py shell
 <QuerySet []>
 
 # 新增一位使用者
->>> User.objects.create(name='tony', iq=200)
+>>> u1 = User.objects.create(username='tony')
+>>> u1.set_password('password123')
+>>> u1.save()
 
 # 新增一篇文章
 >>> Article.objects.create(title='demo', context='Django manage.py shell 測試', author_id=1)

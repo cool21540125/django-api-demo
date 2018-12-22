@@ -1,12 +1,24 @@
-@baseURL=127.0.0.1:8000
+@baseURL=http://127.0.0.1:8000
 
 ### 
-GET http://{{baseURL}}/blog
+GET {{baseURL}}/blog
 
 ### 
-GET http://{{baseURL}}/blog/1
+GET {{baseURL}}/blog/1
 
 ### 
-GET http://{{baseURL}}/blog/2
+GET {{baseURL}}/blog/2
 
 
+### Django Obj GET
+GET {{baseURL}}/blog/users
+
+### Django Obj POST
+POST {{baseURL}}/blog/users
+Authorization: Basic tony password123
+
+### Django Obj PUT
+PUT {{baseURL}}/blog/users
+
+### Django Obj DELETE
+DELETE {{baseURL}}/blog/users
